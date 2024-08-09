@@ -33,6 +33,9 @@ spec:
             sleepmode.loft.sh/ignore-user-agents: argo*
         instanceTemplate:
           metadata:
+            annotations:
+              loft.sh/custom-links: >-
+                Helm-Dashboard=https://helm-dashboard-{{ .Values.loft.virtualClusterName }}-{{ .Values.loft.clusterAnnotations.domainPrefix }}.{{ .Values.loft.clusterAnnotations.domain }}
             labels:
               env: '{{ .Values.env }}'
               team: '{{ .Values.loft.project }}'
@@ -98,6 +101,7 @@ spec:
           description: >-
             The claim to use as the persistent volume for the vCluster `StatefulSet`
           required: true
+          defaultValue: {{ .Values.loft.virtualClusterName }}
         - variable: k8sVersion
           label: k8sVersion
           description: Please select Kubernetes version
