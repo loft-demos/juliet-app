@@ -23,20 +23,26 @@ spec:
       chart:
         version: 0.20.1
       values: |
-        sync:
-          toHost:
-            ingresses:
-              enabled: true
-          fromHost:
-            nodes:
-              enabled: true
-
         controlPlane:
           coredns:
             enabled: true
             embedded: true
           advanced:
             virtualScheduler:
+              enabled: true
+              
+        policies:
+          resourceQuota:
+            enabled: true
+            quota:
+              requests.nvidia.com/gpu: 1
+            
+        sync:
+          toHost:
+            ingresses:
+              enabled: true
+          fromHost:
+            nodes:
               enabled: true
     accessPoint:
       ingress: {}
