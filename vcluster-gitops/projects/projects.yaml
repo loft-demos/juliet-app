@@ -8,6 +8,7 @@ spec:
     team: loft-admins
   quotas:
     project:
+      requests.nvidia.com/gpu: '4'
       count/virtualclusterinstances.active: '15'
     user:
       count/virtualclusterinstances: '4'
