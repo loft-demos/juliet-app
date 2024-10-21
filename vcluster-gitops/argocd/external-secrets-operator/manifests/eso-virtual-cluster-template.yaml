@@ -67,7 +67,7 @@ spec:
                 property: .dockerconfigjson
         helmRelease:
           chart:
-            version: 0.21.0-beta.2
+            version: 0.21.0-beta.5
           values: |+
             external:
               platform:
@@ -92,7 +92,6 @@ spec:
                 labels:
                   env: '{{ .Values.env }}'
                   team: '{{ .Values.loft.project }}'
-                  pvClaimName: '{{ .Values.pvClaimName }}'
               # Use an embedded managed etcd server instead of using the default SQLite backend
               backingStore:
                 etcd:
@@ -115,12 +114,6 @@ spec:
         spaceTemplate:
           metadata: {}
       parameters:
-        - variable: pvClaimName
-          label: Persistent Volume Claim Name
-          description: >-
-            The claim to use as the persistent volume for the vCluster `StatefulSet`
-          required: true
-          defaultValue: "pvclaim-id"
         - variable: k8sVersion
           label: k8sVersion
           description: Please select Kubernetes version
