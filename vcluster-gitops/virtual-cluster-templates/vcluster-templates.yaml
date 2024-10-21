@@ -73,6 +73,9 @@ spec:
                   enabled: true
 
             controlPlane:
+              hostPathMapper:
+                enabled: true
+                central: true
               statefulSet:
                 annotations:
                   demo.loft.sh/pvClaimName: '{{ .Values.pvClaimName }}'
