@@ -17,6 +17,7 @@ spec:
   project: default
   source:
     chart: gateway-helm
+    path: 'gateway-helm'
     repoURL: docker.io/envoyproxy
     targetRevision: v1.1.2
   syncPolicy:
