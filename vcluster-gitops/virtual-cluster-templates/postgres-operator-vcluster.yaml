@@ -1,9 +1,9 @@
 kind: VirtualClusterTemplate
 apiVersion: management.loft.sh/v1
 metadata:
-  name: preview-template
+  name: postgres-operator-template
 spec:
-  displayName: vCluster.Pro Preview Template
+  displayName: Postgres Operator Template
   template:
     metadata:
       labels:
