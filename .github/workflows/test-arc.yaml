@@ -8,3 +8,5 @@ jobs:
     runs-on: kubepi-test
     steps:
     - run: echo "Meg is awesome 🎉 This job uses runner scale set runners!"
+    - run: sleep 60
+    - run: echo "Done"
