@@ -25,6 +25,7 @@ spec:
               domain: {{ .Values.loft.virtualClusterName }}-{{ .Values.loft.project }}-{{ .Values.loft.clusterAnnotations.domainPrefix }}.{{ .Values.loft.clusterAnnotations.domain }}
             configs:
               cm:
+                url: https://{{ .Values.loft.virtualClusterName }}-{{ .Values.loft.project }}-{{ .Values.loft.clusterAnnotations.domainPrefix }}.{{ .Values.loft.clusterAnnotations.domain }}
                 create: true
                 application.resourceTrackingMethod: annotation
               params:
