@@ -18,7 +18,7 @@ spec:
             Repo=https://github.com/loft-demos/{{ .Values.loft.clusterAnnotations.domainPrefix }}-app/
     apps:
       - name: argocd
-        version: 2.12.1
+        version: 2.14.1
         parameters: |
           appValues: |-
             global:
