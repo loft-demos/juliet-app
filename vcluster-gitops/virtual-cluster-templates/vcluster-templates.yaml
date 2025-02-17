@@ -66,11 +66,9 @@ spec:
                   enabled: true
                 secrets:
                   all: true
-                {{if .Values.loft.clusterAnnotations.postgres}}
                 customResources:
                   postgresqls.acid.zalan.do:
                     enabled: true
-                {{end}}
             
             #plugins:
               #rancher:
