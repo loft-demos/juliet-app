@@ -2,8 +2,6 @@ kind: VirtualClusterTemplate
 apiVersion: management.loft.sh/v1
 metadata:
   name: default-template
-  annotations:
-    argocd.argoproj.io/sync-options: Validate=false
 spec:
   displayName: Default Virtual Cluster Template
   description: This virtual cluster template deploys a vCluster with embedded etcd and integrated CoreDNS.
@@ -69,10 +67,8 @@ spec:
                 secrets:
                   all: true
                 customResources:
-                  {{if .Values.loft.clusterAnnotations.postgres}}
                   postgresqls.acid.zalan.do:
-                    enabled: true
-                  {{end}}
+                    enabled: {{ Values.loft.clusterAnnotations.postgres }}
             
             #plugins:
               #rancher:
