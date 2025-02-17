@@ -1,5 +1,4 @@
 resources:
-- shared-secrets/shared-secrets.yaml
 - teams/teams.yaml
 - users/users.yaml
 - apps/argo-cd.yaml
