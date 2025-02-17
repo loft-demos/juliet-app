@@ -308,9 +308,9 @@ spec:
         external:
           platform:
             autoSleep:
-              afterInactivity: {{ mul .Values.sleepAfter 60 }}
+              afterInactivity: 60
             autoDelete:
-              afterInactivity: {{ mul .Values.sleepAfter 120 }}
+              afterInactivity: 120
     accessPoint:
       ingress: {}
     spaceTemplate:
