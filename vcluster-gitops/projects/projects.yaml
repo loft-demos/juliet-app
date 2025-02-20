@@ -95,6 +95,10 @@ spec:
       group: storage.loft.sh
       name: auth-core
       clusterRole: loft-management-project-user
+    - kind: Team
+      group: storage.loft.sh
+      clusterRole: loft-management-project-admin
+      name: loft-admins
   access:
     - name: loft-admin-access
       verbs:
