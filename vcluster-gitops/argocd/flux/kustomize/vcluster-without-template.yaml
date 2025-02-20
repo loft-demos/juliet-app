@@ -48,6 +48,7 @@ spec:
       metadata: {}
   clusterRef:
     cluster: loft-cluster
+    namespace: test
   access:
     - name: instance-access
       verbs:
