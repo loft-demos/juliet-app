@@ -21,7 +21,9 @@ spec:
       enabled: true
     helmRelease:
       chart:
-        version: 0.23.0-rc.4
+        name: vcluster
+        repo: https://loft-demos.github.io/vcluster-charts
+        version: 0.22.3
       values: |
         sync:
           toHost:
@@ -36,6 +38,10 @@ spec:
             etcd:
               embedded:
                 enabled: true
+          statefulSet:
+            image:
+              repository: "loft-demos/vcluster-pro"
+              tag: "0.22.4-k8s.v1.31.6"
     accessPoint:
       ingress: {}
     spaceTemplate:
