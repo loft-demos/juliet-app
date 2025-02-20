@@ -22,6 +22,6 @@ spec:
       enabled: true
   clusterRef:
     cluster: loft-cluster
-    namespace: test
+    namespace: default
   owner:
     user: kurtmadel
