@@ -6,7 +6,7 @@ metadata:
 spec:
   displayName: vCluster Deployed with Flux
   owner:
-    team: loftadmins
+    team: loft-admins
   template:
     metadata: {}
     instanceTemplate:
