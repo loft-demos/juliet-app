@@ -84,6 +84,11 @@ spec:
             integrations:
               externalSecrets:
                 enabled: true
+                sync:
+                  clusterStores:
+                    selector:
+                      labels:
+                        demos.loft.sh/eso-demo-cluster-store: 'true'
 
             controlPlane:
               statefulSet:
