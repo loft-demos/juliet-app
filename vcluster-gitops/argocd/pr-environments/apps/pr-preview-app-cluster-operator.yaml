@@ -17,8 +17,12 @@ spec:
               requeueAfterSeconds: 30
           - clusters:
               selector:
+                matchExpressions:
+                  - key: prNumber
+                    operator: In
+                    values:
+                      - "{{number}}" 
                 matchLabels:
-                  prNumber: '{{ .number }}'
                   repo: juliet-app
                   prLabel: 'create-pr-vcluster-external-argocd'
   template:
