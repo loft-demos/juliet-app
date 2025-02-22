@@ -1,6 +1,4 @@
-# PR vCluster
-
-Flow:
+# PR vCluster with Shared Argo CD Flow
 
 ```mermaid
 ---
