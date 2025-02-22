@@ -31,7 +31,7 @@ spec:
       info:
         - name: GitHub Repo
           value: https://github.com/loft-demos/{{metadata.labels.repo}}/
-      project: default
+      project: loft-auth-core
       source:
         repoURL: https://github.com/loft-demos/{{metadata.labels.repo}}.git
         targetRevision: '{{head_sha}}'
