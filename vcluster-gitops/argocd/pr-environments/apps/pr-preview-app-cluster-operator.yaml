@@ -18,7 +18,7 @@ spec:
           - clusters:
               selector:
                 matchLabels:
-                  prNumber: "{{number}}"
+                  prNumber: "{{ .number }}"
                   repo: juliet-app
                   prLabel: 'create-pr-vcluster-external-argocd'
   template:
