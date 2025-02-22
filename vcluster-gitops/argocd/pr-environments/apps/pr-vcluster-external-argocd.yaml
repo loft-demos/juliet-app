@@ -30,7 +30,7 @@ spec:
           value: https://argocd-juliet.us.demo.dev
         - name: GitHub PR
           value: https://github.com/loft-demos/juliet-app/pull/{{number}}
-      project: default
+      project: loft-auth-core
       source:
         kustomize:
           namePrefix: juliet-app-pr-{{number}}-
