@@ -43,8 +43,8 @@ spec:
                   path: /metadata/labels/repo
                   value: juliet-app
                 - op: add
-                  path: /metadata/labels/pr
-                  value: 'true'
+                  path: /metadata/labels/prLabel
+                  value: 'create-pr-vcluster-external-argocd'
                 - op: add
                   path: /metadata/labels/prNumber
                   value: '{{number}}'
