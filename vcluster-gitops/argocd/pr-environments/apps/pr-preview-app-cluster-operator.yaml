@@ -5,12 +5,22 @@ metadata:
   namespace: argocd
 spec:
   generators:
-    - clusters:
-        selector:
-          matchLabels:
-            prNumber: '{{number}}'
-            repo: 'juliet-app'
-            prLabel: 'create-pr-vcluster-external-argocd'
+    - merge:
+        generators:
+          - pullRequest:
+              github:
+                appSecretName: loft-demo-org-cred
+                labels:
+                  - create-pr-vcluster-external-argocd
+                owner: loft-demos
+                repo: juliet-app
+              requeueAfterSeconds: 30
+          - clusters:
+              selector:
+                matchLabels:
+                  prNumber: "{{number}}"
+                  repo: juliet-app
+                  prLabel: 'create-pr-vcluster-external-argocd'
   template:
     metadata:
       name: "{{metadata.labels.vclusterName}}"
