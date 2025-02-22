@@ -62,7 +62,7 @@ spec:
                 name: vcluster
         path: vcluster-gitops/argocd/pr-environments/kustomize
         repoURL: https://github.com/loft-demos/juliet-app.git
-        targetRevision: '{{head_sha}}'
+        targetRevision: '{{branch}}'
       syncPolicy:
         automated:
           selfHeal: true
