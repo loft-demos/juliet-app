@@ -60,7 +60,7 @@ jobs:
           tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.SHORT_SHA }}
           labels: ${{ steps.meta.outputs.labels }}
   wakeup-vcluster:
-    if: contains(github.event.pull_request.labels.*.name, 'create-pr-vcluster-external-argocd'))
+    if: contains(github.event.pull_request.labels.*.name, 'create-pr-vcluster-external-argocd')
     runs-on: ubuntu-latest
     steps:
       - name: Install vCluster CLI
