@@ -28,6 +28,8 @@ spec:
   template:
     metadata:
       name: "{{metadata.labels.vclusterName}}"
+      labels:
+        vclusterName: "{{metadata.labels.vclusterName}}"
     spec:
       destination:
         namespace: preview-hello-world-app
