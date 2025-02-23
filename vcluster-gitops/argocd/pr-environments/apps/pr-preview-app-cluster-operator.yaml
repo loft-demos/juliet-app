@@ -27,7 +27,7 @@ spec:
                   prLabel: 'create-pr-vcluster-external-argocd'
   template:
     metadata:
-      name: juliet-app-pr-{{number}}-preview-app
+      name: "juliet-app-pr-{{number}}-preview-app"
       annotations:
         notifications.argoproj.io/subscribe.wakeup-vcluster.vcluster-platform: ""
       labels:
