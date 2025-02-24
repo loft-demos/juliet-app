@@ -30,7 +30,7 @@ spec:
     - template:
         metadata:
           annotations:
-            sleepmode.loft.sh/ignore-user-agents: argo*
+            sleepmode.loft.sh/ignore-user-agents: argocd-application-controller*
         instanceTemplate:
           metadata:
             annotations:
