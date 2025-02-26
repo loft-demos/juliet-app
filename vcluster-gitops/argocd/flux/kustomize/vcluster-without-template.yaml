@@ -66,7 +66,8 @@ spec:
           releaseName: podinfo
           kubeConfig:
             secretRef:
-              name: vcluster-flux-kubeconfig
+              name: vcluster-deployed-with-flux
+              key: config
           chart:
             spec:
               chart: podinfo
@@ -87,7 +88,7 @@ spec:
           # https://github.com/stefanprodan/podinfo/blob/master/charts/podinfo/values.yaml
           values:
             ui:
-              message: "deployed to vcluster-deployed-with-flux"
+              message: "deployed to vcluster-deployed-with-flux test-2"
             ingress:
               enabled: true
               className: nginx
