@@ -86,6 +86,8 @@ spec:
           # Default values
           # https://github.com/stefanprodan/podinfo/blob/master/charts/podinfo/values.yaml
           values:
+            ui:
+              message: "deployed to vcluster-deployed-with-flux"
             ingress:
               enabled: true
               className: nginx
