@@ -46,6 +46,8 @@ spec:
       ingress: {}
     spaceTemplate:
       metadata: {}
+      apps:
+        - name: generate-vcluster-kubeconfig
       objects: |-
         ---
         apiVersion: source.toolkit.fluxcd.io/v1
