@@ -3,3 +3,4 @@ kind: Kustomization
 resources:
 - vcluster-with-template.yaml
 - vcluster-without-template.yaml
+- flux-helm-release.yaml
