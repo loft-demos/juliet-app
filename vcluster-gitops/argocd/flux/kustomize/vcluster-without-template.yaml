@@ -52,7 +52,7 @@ spec:
         kind: HelmRepository
         metadata:
           name: podinfo
-          namespace: loft-auth-core-v-auth-core-dev
+          namespace: loft-auth-core-v-vcluster-deployed-with-flux
         spec:
           interval: 12h
           url: https://stefanprodan.github.io/podinfo
@@ -61,7 +61,7 @@ spec:
         kind: HelmRelease
         metadata:
           name: podinfo
-          namespace: loft-auth-core-v-auth-core-dev
+          namespace: loft-auth-core-v-vcluster-deployed-with-flux
         spec:
           targetNamespace: podinfo
           storageNamespace: podinfo
@@ -92,7 +92,7 @@ spec:
               enabled: true
               className: nginx
               hosts:
-                - host: podinfo-auth-core-dev-juliet.us.demo.dev
+                - host: podinfo-vcluster-deployed-with-flux-juliet.us.demo.dev
                   paths:
                     - path: /
                       pathType: ImplementationSpecific
