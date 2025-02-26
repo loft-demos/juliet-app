@@ -66,7 +66,7 @@ spec:
           releaseName: podinfo
           kubeConfig:
             secretRef:
-              name: vcluster-deployed-with-flux
+              name: vc-vcluster-deployed-with-flux
               key: config
           chart:
             spec:
