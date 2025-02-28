@@ -30,6 +30,9 @@ spec:
             ingresses:
               enabled: true
 
+        exportKubeConfig:
+          server: https://vcluster-deployed-with-flux.loft-auth-core-v-vcluster-deployed-with-flux.svc
+
         controlPlane:
           coredns:
             enabled: true
