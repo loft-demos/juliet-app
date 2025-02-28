@@ -13,7 +13,6 @@ kind: HelmRelease
 metadata:
   name: podinfo
 spec:
-  createNamespace: true
   targetNamespace: podinfo
   storageNamespace: podinfo
   releaseName: podinfo
@@ -31,6 +30,7 @@ spec:
         target:
           kind: Deployment
   install:
+    createNamespace: true
     remediation:
       retries: 3
   # Default values
