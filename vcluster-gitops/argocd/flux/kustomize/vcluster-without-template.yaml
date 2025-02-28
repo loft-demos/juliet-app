@@ -33,6 +33,8 @@ spec:
         exportKubeConfig:
           context: loft
           server: https://vcluster-deployed-with-flux.loft-auth-core-v-vcluster-deployed-with-flux.svc:443
+          secret:
+            name: vcluster-platform-kubeconfig
 
         controlPlane:
           coredns:
