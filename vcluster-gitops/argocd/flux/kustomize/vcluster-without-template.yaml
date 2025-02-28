@@ -31,7 +31,8 @@ spec:
               enabled: true
 
         exportKubeConfig:
-          server: https://vcluster-deployed-with-flux.loft-auth-core-v-vcluster-deployed-with-flux.svc
+          context: loft
+          server: https://vcluster-deployed-with-flux.loft-auth-core-v-vcluster-deployed-with-flux.svc:443
 
         controlPlane:
           coredns:
@@ -92,7 +93,7 @@ spec:
                   path: /spec/values
                   value:
                     ui:
-                      message: "deployed to vcluster-deployed-with-flux test-2"
+                      message: "deployed to vcluster-deployed-with-flux test-3"
                 - op: add
                   path: /spec/values/ingress
                   value:
