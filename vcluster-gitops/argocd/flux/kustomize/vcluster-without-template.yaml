@@ -91,6 +91,7 @@ spec:
                   value:
                     secretRef:
                       name: vcluster-platform-kubeconfig
+                      key: config
                 - op: add
                   path: /spec/values
                   value:
