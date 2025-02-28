@@ -96,6 +96,7 @@ spec:
                 - op: add
                   path: /spec/values/ingress
                   value:
+                    enabled: true
                     hosts:
                       - host: podinfo-vcluster-deployed-with-flux-juliet.us.demo.dev
                         paths:
