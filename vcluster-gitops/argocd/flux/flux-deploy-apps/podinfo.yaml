@@ -13,6 +13,7 @@ kind: HelmRelease
 metadata:
   name: podinfo
 spec:
+  createNamespace: true
   targetNamespace: podinfo
   storageNamespace: podinfo
   releaseName: podinfo
