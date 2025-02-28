@@ -90,12 +90,12 @@ spec:
                   path: /spec/kubeConfig
                   value:
                     secretRef:
-                      name: vcluster-flux-kubeconfig
+                      name: vcluster-platform-kubeconfig
                 - op: add
                   path: /spec/values
                   value:
                     ui:
-                      message: "deployed to vcluster-deployed-with-flux test-3"
+                      message: "deployed to vcluster-deployed-with-flux test-4"
                 - op: add
                   path: /spec/values/ingress
                   value:
