@@ -50,55 +50,44 @@ spec:
         - name: generate-vcluster-kubeconfig
       objects: |-
         ---
-        apiVersion: source.toolkit.fluxcd.io/v1
-        kind: HelmRepository
+        apiVersion: kustomize.toolkit.fluxcd.io/v1
+        kind: Kustomization
         metadata:
-          name: podinfo
+          name: apps
         spec:
-          interval: 12h
-          url: https://stefanprodan.github.io/podinfo
-        ---
-        apiVersion: helm.toolkit.fluxcd.io/v2
-        kind: HelmRelease
-        metadata:
-          name: podinfo
-        spec:
-          targetNamespace: podinfo
-          storageNamespace: podinfo
-          releaseName: podinfo
-          kubeConfig:
-            secretRef:
-              name: vc-vcluster-deployed-with-flux
-              key: config
-          chart:
-            spec:
-              chart: podinfo
-              sourceRef:
-                kind: HelmRepository
-                name: podinfo
-          interval: 50m
-          driftDetection:
-            mode: enabled
-            ignore:
-              - paths: ["/spec/replicas"]
-                target:
-                  kind: Deployment
-          install:
-            remediation:
-              retries: 3
-          # Default values
-          # https://github.com/stefanprodan/podinfo/blob/master/charts/podinfo/values.yaml
-          values:
-            ui:
-              message: "deployed to vcluster-deployed-with-flux test-2"
-            ingress:
-              enabled: true
-              className: nginx
-              hosts:
-                - host: podinfo-vcluster-deployed-with-flux-juliet.us.demo.dev
-                  paths:
-                    - path: /
-                      pathType: ImplementationSpecific
+          interval: 1h
+          retryInterval: 3m
+          timeout: 5m
+          prune: true
+          wait: true
+          path: ./vcluster-gitops/argocd/flux/flux-deploy-apps
+          sourceRef:
+            sourceRef:
+              kind: GitRepository
+              name: juliet-app
+              namespace: p-auth-core
+          patches:
+            - target:
+                kind: HelmRelease
+              patch: |
+                - op: add
+                  path: /spec/kubeConfig
+                  value:
+                    secretRef:
+                      name: vcluster-flux-kubeconfig
+                - op: add
+                  path: /spec/values
+                  value:
+                    ui:
+                      message: "deployed to vcluster-deployed-with-flux test-2"
+                - op: add
+                  path: /spec/values/ingress
+                  value:
+                    hosts:
+                      - host: podinfo-vcluster-deployed-with-flux-juliet.us.demo.dev
+                        paths:
+                          - path: /
+                            pathType: ImplementationSpecific
   clusterRef:
     cluster: loft-cluster
   access:
