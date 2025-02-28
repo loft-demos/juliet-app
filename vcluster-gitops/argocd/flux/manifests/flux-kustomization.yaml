@@ -10,11 +10,12 @@ spec:
       jsonPointers:
         - /spec
         - /status
-  interval: 10m
+        - /metadata
+  interval: 5m
   targetNamespace: p-auth-core
   sourceRef:
     kind: GitRepository
     name: juliet-app
   path: "./vcluster-gitops/argocd/flux/kustomize"
   prune: true
-  timeout: 1m
+  timeout: 2m
