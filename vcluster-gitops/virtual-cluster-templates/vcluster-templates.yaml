@@ -38,7 +38,8 @@ spec:
                 Helm-Dashboard=https://helm-dashboard-{{ .Values.loft.virtualClusterName }}-{{ .Values.loft.clusterAnnotations.domainPrefix }}.{{ .Values.loft.clusterAnnotations.domain }}
             labels:
               env: '{{ .Values.env }}'
-              team: '{{ .Values.loft.project }}'
+              demos.loft.sh/project: '{{ .Values.loft.project }}'
+              demos.loft.sh/owner: '{{ or (and .Values.loft.user .Values.loft.user.name) (and .Values.loft.team .Values.loft.team.name) }}'
         apps:
           - name: helm-dashboard
             namespace: helm-dashboard
@@ -64,6 +65,10 @@ spec:
               toHost:
                 ingresses:
                   enabled: true
+                pods:
+                  patches:
+                    - path: metadata.labels
+                      expression: 'value["demos.loft.sh/owner"]="{{ or (and .Values.loft.user .Values.loft.user.name) (and .Values.loft.team .Values.loft.team.name) }}";value'
                 secrets:
                   all: true
                 customResources:
