@@ -62,10 +62,9 @@ spec:
           wait: true
           path: ./vcluster-gitops/argocd/flux/flux-deploy-apps
           sourceRef:
-            sourceRef:
-              kind: GitRepository
-              name: juliet-app
-              namespace: p-auth-core
+            kind: GitRepository
+            name: juliet-app
+            namespace: p-auth-core
           patches:
             - target:
                 kind: HelmRelease
