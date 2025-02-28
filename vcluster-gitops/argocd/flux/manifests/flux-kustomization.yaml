@@ -4,6 +4,12 @@ metadata:
   name: vcluster-instance
   namespace: p-auth-core
 spec:
+  ignoreDifferences:
+    - group: storage.loft.sh
+      kind: VirtualClusterInstance
+      jsonPointers:
+        - /spec
+        - /status
   interval: 10m
   targetNamespace: p-auth-core
   sourceRef:
