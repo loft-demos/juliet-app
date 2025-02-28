@@ -67,8 +67,19 @@ spec:
             namespace: p-auth-core
           patches:
             - target:
+                kind: HelmRepository
+              patch: |
+                - op: add
+                  path: /metadata/namespace
+                  value:
+                    loft-auth-core-v-vcluster-deployed-with-flux
+            - target:
                 kind: HelmRelease
               patch: |
+                - op: add
+                  path: /metadata/namespace
+                  value:
+                    loft-auth-core-v-vcluster-deployed-with-flux
                 - op: add
                   path: /spec/kubeConfig
                   value:
