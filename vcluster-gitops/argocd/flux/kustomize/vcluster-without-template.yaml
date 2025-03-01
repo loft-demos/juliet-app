@@ -78,19 +78,19 @@ spec:
                 - op: add
                   path: /metadata/namespace
                   value:
-                    loft-auth-core-v-vcluster-deployed-with-flux
+                    p-auth-core
             - target:
                 kind: HelmRelease
               patch: |
                 - op: add
                   path: /metadata/namespace
                   value:
-                    loft-auth-core-v-vcluster-deployed-with-flux
+                    p-auth-core
                 - op: add
                   path: /spec/kubeConfig
                   value:
                     secretRef:
-                      name: vcluster-platform-kubeconfig
+                      name: vcp-{{ .Values.loft.virtualClusterName }}-flux-kubeconfig
                       key: config
                 - op: add
                   path: /spec/values
