@@ -25,7 +25,7 @@ spec:
       chart:
         name: vcluster
         repo: https://loft-demos.github.io/vcluster-charts
-        version: 0.22.3
+        version: 0.23.0
       values: |
         sync:
           toHost:
@@ -97,7 +97,7 @@ spec:
                   path: /spec/values
                   value:
                     ui:
-                      message: "deployed to vcluster-deployed-with-flux test-9"
+                      message: "deployed to vcluster-deployed-with-flux test-10"
                 - op: add
                   path: /spec/values/ingress
                   value:
