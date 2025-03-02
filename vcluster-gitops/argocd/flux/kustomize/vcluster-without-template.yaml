@@ -90,13 +90,13 @@ spec:
                   path: /spec/kubeConfig
                   value:
                     secretRef:
-                      name: vcp-{{ .Values.loft.virtualClusterName }}-flux-kubeconfig
+                      name: vcp-vcluster-deployed-with-flux-flux-kubeconfig
                       key: config
                 - op: add
                   path: /spec/values
                   value:
                     ui:
-                      message: "deployed to vcluster-deployed-with-flux test-8"
+                      message: "deployed to vcluster-deployed-with-flux test-9"
                 - op: add
                   path: /spec/values/ingress
                   value:
