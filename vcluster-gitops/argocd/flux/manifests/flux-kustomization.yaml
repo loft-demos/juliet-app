@@ -18,5 +18,5 @@ spec:
         group: storage.loft.sh
       patch: |-
         - op: add
-          path: /metadata/annotations/kustomize.toolkit.fluxcd.io~1reconcile
-          value: disabled
+          path: /metadata/annotations
+          value: kustomize.toolkit.fluxcd.io/reconcile: disabled
