@@ -12,12 +12,3 @@ spec:
   path: "./vcluster-gitops/argocd/flux/kustomize"
   prune: true
   timeout: 2m
-  patches:
-    - target:
-        kind: VirtualClusterInstance
-        group: storage.loft.sh
-      patch: |-
-        - op: add
-          path: "/metadata/annotations"
-          value: 
-            kustomize.toolkit.fluxcd.io/reconcile: disabled
