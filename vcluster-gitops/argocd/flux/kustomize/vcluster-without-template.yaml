@@ -91,7 +91,6 @@ spec:
                   value:
                     secretRef:
                       name: vcp-vcluster-deployed-with-flux-flux-kubeconfig
-                      key: config
                 - op: add
                   path: /spec/values
                   value:
