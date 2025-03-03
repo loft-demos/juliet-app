@@ -1,0 +1,179 @@
+kind: VirtualClusterTemplate
+apiVersion: management.loft.sh/v1
+metadata:
+  name: vcluster-flux-template
+spec:
+  displayName: Virtual Cluster Flux Template
+  description: This virtual cluster template is configured to integrated the resulting vCluster with Flux by creating a Flux KubeConfig Secret and thenautomatically using Flux to deploy a `HelmRelease` based application into the vCluster.
+  owner:
+    team: loft-admins
+  template:
+    metadata: {}
+    instanceTemplate:
+      metadata: {}
+    pro: {}
+    helmRelease:
+      chart:
+        version: 0.23.0
+      values: |-
+        sync:
+          toHost:
+            ingresses:
+              enabled: true
+    accessPoint:
+      ingress: {}
+    spaceTemplate:
+      metadata: {}
+  versions:
+    - version: 1.0.0
+      template:
+        metadata: {}
+        instanceTemplate:
+          metadata:
+            annotations:
+              loft.sh/custom-links: >-
+                Flux-App=https://podinfo-{{ .Values.loft.virtualClusterName }}-{{ .Values.loft.clusterAnnotations.domainPrefix }}.{{ .Values.loft.clusterAnnotations.domain }}
+        apps:
+          - name: helm-dashboard
+            namespace: helm-dashboard
+        pro:
+          enabled: true
+        helmRelease:
+          chart:
+            name: vcluster
+            repo: https://loft-demos.github.io/vcluster-charts
+            version: 0.23.0
+          values: |
+            exportKubeConfig:
+              context: loft
+              server: https://{{ .Values.loft.virtualClusterName }}.{{ .Values.loft.virtualClusterNamespace }}:443
+              secret:
+                name: vcluster-flux-kubeconfig
+                
+            external:
+              platform:
+                autoSleep:
+                  afterInactivity: 1620
+                  autoWakeup:
+                    schedule: 11 7-17 * * 1-5
+                  timezone: "America/New_York"
+                autoDelete:
+                  afterInactivity: 1800000
+                  
+            sync:
+              toHost:
+                ingresses:
+                  enabled: true
+
+            controlPlane:
+              advanced:
+                workloadServiceAccount:
+                  enabled: true
+                  imagePullSecrets:
+                  - name: "hook-image-pull-secret"
+              statefulSet:
+                image:
+                  repository: "loft-demos/vcluster-pro"
+                  tag: "0.23.0-k8s.v1.32.1"
+              # Use an embedded managed etcd server instead of using the default SQLite backend
+              backingStore:
+                etcd:
+                  embedded:
+                    enabled: true
+              coredns:
+                embedded: true
+        accessPoint:
+          ingress: {}
+        spaceTemplate:
+          metadata: {}
+          apps:
+            - name: generate-vcluster-kubeconfig
+          objects: |-
+            ---
+            apiVersion: v1
+            kind: Secret
+            metadata:
+              name: hook-image-pull-secret
+              labels:
+                loft.sh/project-secret-name: ghcr-login-secret
+            data:
+              .dockerconfigjson: e30K
+            type: kubernetes.io/dockerconfigjson
+            ---
+            apiVersion: kustomize.toolkit.fluxcd.io/v1
+            kind: Kustomization
+            metadata:
+              name: apps
+            spec:
+              interval: 1h
+              retryInterval: 3m
+              timeout: 5m
+              prune: true
+              wait: true
+              path: ./vcluster-gitops/argocd/flux/flux-deploy-apps
+              sourceRef:
+                kind: GitRepository
+                name: juliet-app
+                namespace: p-auth-core
+              patches:
+                - target:
+                    kind: HelmRepository
+                  patch: |
+                    - op: add
+                      path: /metadata/namespace
+                      value:
+                        {{ .Values.loft.virtualClusterNamespace }}
+                - target:
+                    kind: HelmRelease
+                  patch: |
+                    - op: add
+                      path: /metadata/namespace
+                      value:
+                        {{ .Values.loft.virtualClusterNamespace }}
+                    - op: add
+                      path: /spec/kubeConfig
+                      value:
+                        secretRef:
+                          name: vcluster-flux-kubeconfig
+                          key: config
+                    - op: add
+                      path: /spec/values
+                      value:
+                        ui:
+                          message: "deployed to {{ .Values.loft.virtualClusterName }} test-11"
+                    - op: add
+                      path: /spec/values/ingress
+                      value:
+                        enabled: true
+                        hosts:
+                          - host: podinfo-{{ .Values.loft.virtualClusterName }}-{{ .Values.loft.clusterAnnotations.domainPrefix }}.{{ .Values.loft.clusterAnnotations.domain }}
+                            paths:
+                              - path: /
+                                pathType: ImplementationSpecific
+    - version: 0.0.0
+      template:
+        metadata: {}
+        instanceTemplate:
+          metadata: {}
+        pro:
+          enabled: true
+        helmRelease:
+          chart:
+            version: 0.20.1
+          values: |-
+            sync:
+              toHost:
+                ingresses:
+                  enabled: true
+        accessPoint:
+          ingress: {}
+        spaceTemplate:
+          metadata: {}
+  access:
+    - verbs:
+        - '*'
+      subresources:
+        - '*'
+      users:
+        - admin
+status: {}
