@@ -66,11 +66,6 @@ spec:
                   enabled: true
 
             controlPlane:
-              advanced:
-                workloadServiceAccount:
-                  enabled: true
-                  imagePullSecrets:
-                  - name: "hook-image-pull-secret"
               statefulSet:
                 image:
                   repository: "loft-demos/vcluster-pro"
@@ -89,16 +84,6 @@ spec:
           apps:
             - name: generate-vcluster-kubeconfig
           objects: |-
-            ---
-            apiVersion: v1
-            kind: Secret
-            metadata:
-              name: hook-image-pull-secret
-              labels:
-                loft.sh/project-secret-name: ghcr-login-secret
-            data:
-              .dockerconfigjson: e30K
-            type: kubernetes.io/dockerconfigjson
             ---
             apiVersion: kustomize.toolkit.fluxcd.io/v1
             kind: Kustomization
