@@ -86,11 +86,7 @@ spec:
   allowedTemplates:
     - kind: VirtualClusterTemplate
       group: storage.loft.sh
-      name: default-template
-      isDefault: true
-    - kind: VirtualClusterTemplate
-      group: storage.loft.sh
-      name: vcluster-pro-template
+      name: '*'
   requireTemplate: {}
   members:
     - kind: Team
