@@ -45,7 +45,6 @@ spec:
               embedded:
                 enabled: true
           statefulSet:
-            imagePullPolicy: Always
             image:
               repository: "loft-demos/vcluster-pro"
               tag: "0.23.0-k8s.v1.32.1"
