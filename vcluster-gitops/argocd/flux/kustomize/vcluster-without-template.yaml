@@ -4,7 +4,7 @@ metadata:
   name: vcluster-deployed-with-flux
   namespace: p-auth-core
   annotations:
-    kustomize.toolkit.fluxcd.io/prune: disabled
+    kustomize.toolkit.fluxcd.io/reconcile: disabled
 spec:
   displayName: vCluster Deployed with Flux
   owner:
