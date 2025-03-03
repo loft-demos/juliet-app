@@ -98,7 +98,7 @@ spec:
                   path: /spec/values
                   value:
                     ui:
-                      message: "deployed to vcluster-deployed-with-flux test-10"
+                      message: "deployed to vcluster-deployed-with-flux test-11"
                 - op: add
                   path: /spec/values/ingress
                   value:
