@@ -47,16 +47,11 @@ spec:
                   value: juliet-app
                 - op: add
                   path: /metadata/labels/prLabel
+                  # this should match the Pull Request label you are using above for the pullRequest generator
                   value: 'create-pr-vcluster-external-argocd'
                 - op: add
                   path: /metadata/labels/prNumber
                   value: '{{number}}'
-                - op: add
-                  path: /metadata/labels/targetRevision
-                  value: '{{head_sha}}'
-                - op: add
-                  path: /metadata/labels/headShortSha
-                  value: '{{head_short_sha}}'
                 - op: add
                   path: /metadata/labels/headBranch
                   value: '{{branch}}'
