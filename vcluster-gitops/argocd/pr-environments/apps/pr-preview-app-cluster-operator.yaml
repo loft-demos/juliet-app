@@ -16,6 +16,8 @@ spec:
                 repo: juliet-app
               requeueAfterSeconds: 30
           - clusters:
+              # this selector ensures that the preview app PR deployment matches to 
+              # the vCluster for the same repo, PR number and PR label
               selector:
                 matchExpressions:
                   - key: prNumber
@@ -24,6 +26,7 @@ spec:
                       - "{{number}}" 
                 matchLabels:
                   repo: juliet-app
+                  # the prLabel needs to match the pullRequest label above
                   prLabel: 'create-pr-vcluster-external-argocd'
   template:
     metadata:
