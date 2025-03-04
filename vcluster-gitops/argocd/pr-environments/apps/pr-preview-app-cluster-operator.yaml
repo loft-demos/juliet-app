@@ -9,7 +9,9 @@ spec:
         generators:
           - pullRequest:
               github:
+                # secret with GitHub App Credential
                 appSecretName: loft-demo-org-cred
+                # label(s) applied to Pull Request
                 labels:
                   - create-pr-vcluster-external-argocd
                 owner: loft-demos
