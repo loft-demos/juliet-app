@@ -32,19 +32,26 @@ spec:
                   prLabel: 'create-pr-vcluster-external-argocd'
   template:
     metadata:
+      # using the repo name with the Pull Request number keeps the generated Application name unique 
       name: "juliet-app-pr-{{number}}-preview-app"
       annotations:
+        # optional - used to send a notification to the PR vCluster control plane API server
+        # it will trigger it to wake-up if the vCluster Platform has put it to sleep
+        # this is necessary as the Argo CD cluster check will be ignored if the Argo CD user-agent has been filtered
         notifications.argoproj.io/subscribe.wakeup-vcluster.vcluster-platform: ""
+      # the following labels are optional
       labels:
         vclusterName: "{{metadata.labels.vclusterName}}"
         vclusterProjectId: "{{metadata.labels.vclusterProjectId}}"
     spec:
       destination:
+        # namespace where the PR app will be deployed in the vCluster
         namespace: preview-hello-world-app
         server: '{{server}}'
       info:
         - name: GitHub Repo
           value: https://github.com/loft-demos/{{metadata.labels.repo}}/
+      # set the Argo CD project to default if not using a specific project 
       project: loft-auth-core
       source:
         repoURL: https://github.com/loft-demos/{{metadata.labels.repo}}.git
