@@ -18,7 +18,7 @@ spec:
   source:
     chart: flux2
     repoURL: https://fluxcd-community.github.io/helm-charts
-    targetRevision: 2.14.1
+    targetRevision: 2.15.0
   syncPolicy:
     automated:
       prune: true
