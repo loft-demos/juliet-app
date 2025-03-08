@@ -12,6 +12,7 @@ spec:
   path: "./vcluster-gitops/argocd/flux/kustomize"
   prune: true
   timeout: 2m
+  wait: true
   healthCheckExprs:
     - apiVersion: management.loft.sh/v1
       kind: VirtualClusterInstance
