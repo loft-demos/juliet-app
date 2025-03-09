@@ -4,7 +4,6 @@ metadata:
   name: preview-app
   namespace: p-auth-core
 spec:
-  serviceAccountName: flux
   inputsFrom:
     - apiVersion: fluxcd.controlplane.io/v1
       kind: ResourceSetInputProvider
