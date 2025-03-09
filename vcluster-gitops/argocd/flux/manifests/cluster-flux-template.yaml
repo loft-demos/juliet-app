@@ -49,7 +49,7 @@ spec:
               context: loft
               server: https://{{ .Values.loft.virtualClusterName }}.{{ .Values.loft.virtualClusterNamespace }}:443
               secret:
-                name: vcluster-flux-kubeconfig
+                name: {{ .Values.loft.virtualClusterName }}-flux-kubeconfig
                 
             external:
               platform:
