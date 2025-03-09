@@ -27,6 +27,8 @@ spec:
               create: true
               hosts:
                 - host: flux-notification-juliet.us.demo.dev
+                  paths:
+                    - path: '/'
   syncPolicy:
     automated:
       prune: true
