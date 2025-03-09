@@ -2,6 +2,8 @@ kind: VirtualClusterTemplate
 apiVersion: management.loft.sh/v1
 metadata:
   name: vcluster-flux-template
+  annotations:
+    argocd.argoproj.io/sync-options: Validate=false
 spec:
   displayName: Virtual Cluster Flux Template
   description: This virtual cluster template is configured to integrated the resulting vCluster with Flux by creating a Flux KubeConfig Secret and thenautomatically using Flux to deploy a `HelmRelease` based application into the vCluster.
