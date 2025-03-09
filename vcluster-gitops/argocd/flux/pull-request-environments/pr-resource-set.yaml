@@ -97,7 +97,7 @@ spec:
                 path: /spec/kubeConfig
                 value:
                   secretRef:
-                    name: juliet-app-preview-flux-vcluster-<< inputs.id >>-flux-kubeconfig
+                    name: flux-kubeconfig
                     key: config
               - op: add
                 path: /spec/values
