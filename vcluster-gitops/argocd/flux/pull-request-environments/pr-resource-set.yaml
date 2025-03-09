@@ -49,64 +49,65 @@ spec:
                 path: /metadata/name
                 value:
                   juliet-app-preview-flux-vcluster-<< inputs.id >>
-    # - apiVersion: source.toolkit.fluxcd.io/v1
-    #   kind: GitRepository
-    #   metadata:
-    #     name: juliet-app-preview-<< inputs.id >>
-    #     namespace: app-preview
-    #   spec:
-    #     provider: generic # or 'github' if using GitHub App
-    #     interval: 1h
-    #     url: https://github.com/org/app
-    #     ref:
-    #       commit: << inputs.sha >>
-    # - apiVersion: kustomize.toolkit.fluxcd.io/v1
-    #   kind: Kustomization
-    #   metadata:
-    #     name: apps
-    #   spec:
-    #     dependsOn:
-    #       - name: vcluster-deployed-with-flux
-    #     interval: 1h
-    #     retryInterval: 3m
-    #     timeout: 5m
-    #     prune: true
-    #     wait: true
-    #     path: ./vcluster-gitops/argocd/flux/flux-deploy-apps
-    #     sourceRef:
-    #       kind: GitRepository
-    #       name: juliet-app-preview-<< inputs.id >>
-    #     patches:
-    #       - target:
-    #           kind: HelmRepository
-    #         patch: |
-    #           - op: add
-    #             path: /metadata/namespace
-    #             value:
-    #               p-auth-core
-    #       - target:
-    #           kind: HelmRelease
-    #         patch: |
-    #           - op: add
-    #             path: /metadata/namespace
-    #             value:
-    #               p-auth-core
-    #           - op: add
-    #             path: /spec/kubeConfig
-    #             value:
-    #               secretRef:
-    #                 name: vcp-vcluster-deployed-with-flux-flux-kubeconfig
-    #           - op: add
-    #             path: /spec/values
-    #             value:
-    #               ui:
-    #                 message: "deployed to vcluster-deployed-with-flux test-11"
-    #           - op: add
-    #             path: /spec/values/ingress
-    #             value:
-    #               enabled: true
-    #               hosts:
-    #                 - host: podinfo-vcluster-deployed-with-flux-juliet.us.demo.dev
-    #                   paths:
-    #                     - path: /
-    #                       pathType: ImplementationSpecific
+    - apiVersion: source.toolkit.fluxcd.io/v1
+      kind: GitRepository
+      metadata:
+        name: juliet-app-preview-<< inputs.id >>
+        namespace: p-auth-core
+      spec:
+        provider: generic # or 'github' if using GitHub App
+        interval: 1h
+        url: https://github.com/loft-demos/juliet-app
+        ref:
+          commit: << inputs.sha >>
+    - apiVersion: kustomize.toolkit.fluxcd.io/v1
+      kind: Kustomization
+      metadata:
+        name: preview-app
+        namespace: p-auth-core
+      spec:
+        dependsOn:
+          - name: juliet-app-preview-flux-vcluster-<< inputs.id >>
+        interval: 1h
+        retryInterval: 3m
+        timeout: 5m
+        prune: true
+        wait: true
+        path: ./vcluster-gitops/argocd/flux/flux-deploy-apps
+        sourceRef:
+          kind: GitRepository
+          name: juliet-app-preview-<< inputs.id >>
+        patches:
+          - target:
+              kind: HelmRepository
+            patch: |
+              - op: add
+                path: /metadata/namespace
+                value:
+                  loft-auth-core-v-juliet-app-preview-flux-vcluster-<< inputs.id >>
+          - target:
+              kind: HelmRelease
+            patch: |
+              - op: add
+                path: /metadata/namespace
+                value:
+                  loft-auth-core-v-juliet-app-preview-flux-vcluster-<< inputs.id >>
+              - op: add
+                path: /spec/kubeConfig
+                value:
+                  secretRef:
+                    name: juliet-app-preview-flux-vcluster-<< inputs.id >>-flux-kubeconfig
+              - op: add
+                path: /spec/values
+                value:
+                  ui:
+                    message: "deployed to vcluster-deployed-with-flux << inputs.sha >>"
+              - op: add
+                path: /spec/values/ingress
+                value:
+                  enabled: true
+                  hosts:
+                    - host: juliet-app-preview-flux-vcluster-<< inputs.id >>.us.demo.dev
+                      paths:
+                        - path: /
+                          pathType: ImplementationSpecific
