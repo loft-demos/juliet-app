@@ -2,6 +2,7 @@ apiVersion: fluxcd.controlplane.io/v1
 kind: ResourceSet
 metadata:
   name: preview-app
+  # the vCluster Platfrom Auth Core project namespace
   namespace: p-auth-core
 spec:
   inputsFrom:
@@ -14,6 +15,7 @@ spec:
       metadata:
         # GitRepository resource for the vCluster instance
         name: juliet-app-preview-flux-vcluster-<< inputs.id >>
+        # the vCluster Platfrom Auth Core project namespace
         namespace: p-auth-core
       spec:
         provider: generic # or 'github' if using GitHub App
@@ -25,14 +27,16 @@ spec:
     - apiVersion: kustomize.toolkit.fluxcd.io/v1
       kind: Kustomization
       metadata:
-        name: juliet-app-preview-flux-vcluster-<< inputs.id >>
+        # repo name with PR number and part PR label is enough to make the Virtual Cluster Instance name unique
+        name: juliet-app-flux-vcluster-preview-<< inputs.id >>
         namespace: p-auth-core
       spec:
         interval: 1m
+        # the vCluster Platfrom Auth Core project namespace
         targetNamespace: p-auth-core
         sourceRef:
           kind: GitRepository
-          name: juliet-app-preview-flux-vcluster-<< inputs.id >>
+          name: juliet-app-flux-vcluster-preview-<< inputs.id >>
         path: "./vcluster-gitops/argocd/flux/pull-request-environments/kustomize"
         prune: true
         timeout: 2m
@@ -51,6 +55,8 @@ spec:
                 path: /metadata/name
                 value:
                   juliet-app-preview-flux-vcluster-<< inputs.id >>
+    # two GitRepistories are used as the one for the vCluster only needs to be updated per PR
+    # this one, for the PR app deployment into the vCluster, needs to be updated for every PR commit
     - apiVersion: source.toolkit.fluxcd.io/v1
       kind: GitRepository
       metadata:
@@ -61,7 +67,9 @@ spec:
         interval: 1h
         url: https://github.com/loft-demos/juliet-app
         ref:
+          # using PR head sha will trigger update on every commit to PR head branch
           commit: << inputs.sha >>
+    # Kustomization wrapper for HelmRelease to allow use of dependsOn
     - apiVersion: kustomize.toolkit.fluxcd.io/v1
       kind: Kustomization
       metadata:
@@ -69,7 +77,8 @@ spec:
         namespace: p-auth-core
       spec:
         dependsOn:
-          - name: juliet-app-preview-flux-vcluster-<< inputs.id >>
+          # this dependsOn allows for vCluster to be up and running before Flux deploys HelmRelease
+          - name: juliet-app-flux-vcluster-preview-<< inputs.id >>
             namespace: p-auth-core
         interval: 1h
         retryInterval: 3m
@@ -79,6 +88,7 @@ spec:
         path: ./vcluster-gitops/argocd/flux/flux-deploy-apps
         sourceRef:
           kind: GitRepository
+          # using this GitRepository tied to the PR head commit sha
           name: juliet-app-preview-<< inputs.id >>
         patches:
           - target:
@@ -86,16 +96,19 @@ spec:
             patch: |
               - op: add
                 path: /metadata/namespace
-                value:
-                  loft-auth-core-v-juliet-app-preview-flux-vcluster-<< inputs.id >>
+                value: # based on Auth Core project pattern for vCluster namespaces
+                  loft-auth-core-v-juliet-app-flux-vcluster-preview-<< inputs.id >>
           - target:
               kind: HelmRelease
             patch: |
               - op: add
                 path: /metadata/namespace
-                value:
-                  loft-auth-core-v-juliet-app-preview-flux-vcluster-<< inputs.id >>
+                # the HelmRelease must be in the same namespace as the kubeConfig.secretRef for the vCluster
+                value: 
+                  loft-auth-core-v-juliet-app-flux-vcluster-preview-<< inputs.id >>
               - op: add
+                # the kubeConfig.secretRef must be in the same namesapce as the HelmRelease
+                # the vCluster exportKubeConfig is configured to create the Flux useable vCluster Kube Config in the vCluster host namespace
                 path: /spec/kubeConfig
                 value:
                   secretRef:
@@ -105,7 +118,7 @@ spec:
                 path: /spec/values
                 value:
                   ui:
-                    message: "deployed to vcluster-deployed-with-flux << inputs.sha >>"
+                    message: "deployed to juliet-app-flux-vcluster-preview-<< inputs.id >> << inputs.sha >>" # use of sha here to simulate dynamic app deployment
               - op: add
                 path: /spec/values/ingress
                 value:
