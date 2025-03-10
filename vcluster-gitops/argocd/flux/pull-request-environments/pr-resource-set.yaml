@@ -124,7 +124,7 @@ spec:
                 value:
                   enabled: true
                   hosts:
-                    - host: juliet-app-flux-vcluster-preview-<< inputs.id >>.us.demo.dev
+                    - host: podinfo-juliet-app-flux-vcluster-preview-<< inputs.id >>.us.demo.dev
                       paths:
                         - path: /
                           pathType: ImplementationSpecific
