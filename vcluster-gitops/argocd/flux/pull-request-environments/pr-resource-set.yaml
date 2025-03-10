@@ -14,7 +14,7 @@ spec:
       kind: GitRepository
       metadata:
         # GitRepository resource for the vCluster instance
-        name: juliet-app-preview-flux-vcluster-<< inputs.id >>
+        name: juliet-app-flux-vcluster-preview-<< inputs.id >>
         # the vCluster Platfrom Auth Core project namespace
         namespace: p-auth-core
       spec:
@@ -54,7 +54,7 @@ spec:
               - op: add
                 path: /metadata/name
                 value:
-                  juliet-app-preview-flux-vcluster-<< inputs.id >>
+                  juliet-app-flux-vcluster-preview-<< inputs.id >>
     # two GitRepistories are used as the one for the vCluster only needs to be updated per PR
     # this one, for the PR app deployment into the vCluster, needs to be updated for every PR commit
     - apiVersion: source.toolkit.fluxcd.io/v1
@@ -124,7 +124,7 @@ spec:
                 value:
                   enabled: true
                   hosts:
-                    - host: juliet-app-preview-flux-vcluster-<< inputs.id >>.us.demo.dev
+                    - host: juliet-app-flux-vcluster-preview-<< inputs.id >>.us.demo.dev
                       paths:
                         - path: /
                           pathType: ImplementationSpecific
