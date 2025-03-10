@@ -34,7 +34,7 @@ spec:
           metadata:
             annotations:
               loft.sh/custom-links: |-
-                Flux-App=https://podinfo-{{ .Values.loft.virtualClusterName }}-{{ .Values.loft.clusterAnnotations.domainPrefix }}.{{ .Values.loft.clusterAnnotations.domain }}
+                Flux-App=https://podinfo-{{ .Values.loft.virtualClusterName }}.{{ .Values.loft.clusterAnnotations.domain }}
                 Helm-Dashboard=https://helm-dashboard-{{ .Values.loft.virtualClusterName }}-{{ .Values.loft.clusterAnnotations.domainPrefix }}.{{ .Values.loft.clusterAnnotations.domain }}
         apps:
           - name: helm-dashboard
@@ -86,60 +86,6 @@ spec:
           metadata: {}
           apps:
             - name: generate-vcluster-kubeconfig
-          objects: |-
-            ---
-            apiVersion: kustomize.toolkit.fluxcd.io/v1
-            kind: Kustomization
-            metadata:
-              name: apps
-            spec:
-              dependsOn:
-                - name: {{ .Values.loft.virtualClusterName }}
-              interval: 1h
-              retryInterval: 3m
-              timeout: 5m
-              prune: true
-              wait: true
-              path: ./vcluster-gitops/argocd/flux/flux-deploy-apps
-              sourceRef:
-                kind: GitRepository
-                name: juliet-app
-                namespace: p-auth-core
-              patches:
-                - target:
-                    kind: HelmRepository
-                  patch: |
-                    - op: add
-                      path: /metadata/namespace
-                      value:
-                        {{ .Values.loft.virtualClusterNamespace }}
-                - target:
-                    kind: HelmRelease
-                  patch: |
-                    - op: add
-                      path: /metadata/namespace
-                      value:
-                        {{ .Values.loft.virtualClusterNamespace }}
-                    - op: add
-                      path: /spec/kubeConfig
-                      value:
-                        secretRef:
-                          name: vcluster-flux-kubeconfig
-                          key: config
-                    - op: add
-                      path: /spec/values
-                      value:
-                        ui:
-                          message: "deployed to {{ .Values.loft.virtualClusterName }} test-11"
-                    - op: add
-                      path: /spec/values/ingress
-                      value:
-                        enabled: true
-                        hosts:
-                          - host: podinfo-{{ .Values.loft.virtualClusterName }}-{{ .Values.loft.clusterAnnotations.domainPrefix }}.{{ .Values.loft.clusterAnnotations.domain }}
-                            paths:
-                              - path: /
-                                pathType: ImplementationSpecific
     - version: 0.0.0
       template:
         metadata: {}
