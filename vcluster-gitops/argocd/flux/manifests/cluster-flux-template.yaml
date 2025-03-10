@@ -6,7 +6,7 @@ metadata:
     argocd.argoproj.io/sync-options: Validate=false
 spec:
   displayName: Virtual Cluster Flux Template
-  description: This virtual cluster template is configured to integrated the resulting vCluster with Flux by creating a Flux KubeConfig Secret and thenautomatically using Flux to deploy a `HelmRelease` based application into the vCluster.
+  description: This virtual cluster template is configured to integrate the resulting vCluster with Flux by creating a Flux KubeConfig Secret and thenautomatically using Flux to deploy a `HelmRelease` based application into the vCluster.
   owner:
     team: loft-admins
   template:
