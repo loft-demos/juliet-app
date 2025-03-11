@@ -8,6 +8,8 @@ metadata:
 spec:
   type: GitHubPullRequest
   url: https://github.com/loft-demos/juliet-app
+  secretRef:
+    name: github-app-secret
   filter:
     labels:
       - "deploy/flux-vcluster-preview"
