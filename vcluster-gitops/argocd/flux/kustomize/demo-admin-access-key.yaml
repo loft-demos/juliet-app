@@ -2,7 +2,6 @@ apiVersion: storage.loft.sh/v1
 kind: AccessKey
 metadata:
   name: admin-user-72tnz
-  uid: 5e4ecd5c-65a6-4cc2-99e3-1b4651844d1d
 spec:
   displayName: demo-env-admin-access-key
   key: "${accessKey}"
