@@ -5,6 +5,6 @@ metadata:
   uid: 5e4ecd5c-65a6-4cc2-99e3-1b4651844d1d
 spec:
   displayName: demo-env-admin-access-key
-  key: "${access_key}"
+  key: "${accessKey}"
   type: User
   user: admin
