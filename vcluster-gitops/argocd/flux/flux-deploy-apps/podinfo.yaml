@@ -22,7 +22,7 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: podinfo
-  interval: 50m
+  interval: 1h
   driftDetection:
     mode: enabled
     ignore:
@@ -33,6 +33,9 @@ spec:
     createNamespace: true
     remediation:
       retries: 3
+  uninstall:
+    timeout: 1s
+    deletionPropagation: orphan
   # Default values
   # https://github.com/stefanprodan/podinfo/blob/master/charts/podinfo/values.yaml
   values:
