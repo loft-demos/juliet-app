@@ -56,7 +56,7 @@ spec:
         name: juliet-app-flux-vcluster-preview-<< inputs.id >>
         namespace: p-auth-core
       spec:
-        interval: 1m
+        interval: 48h
         # the vCluster Platfrom Auth Core project namespace
         targetNamespace: p-auth-core
         sourceRef:
@@ -64,7 +64,7 @@ spec:
           name: juliet-app-flux-vcluster-preview-<< inputs.id >>
         path: "./vcluster-gitops/argocd/flux/pull-request-environments/kustomize"
         prune: true
-        timeout: 48h
+        timeout: 5m
         wait: true
         # important: this feature requires Flux 2.5+
         healthCheckExprs:
