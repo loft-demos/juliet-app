@@ -29,10 +29,10 @@ spec:
         summary: "PR Updated, wakeup vCluster"
         providerRef:
           name: juliet-app-preview-<< inputs.id >>
-        eventSeverity: error
+        eventSeverity: info
         eventSources:
-          - kind: Kustomization
-            name: 'juliet-app-flux-vcluster-preview-<< inputs.id >>'
+          - kind: GitRepository
+            name: 'juliet-app-preview-<< inputs.id >>'
     - apiVersion: source.toolkit.fluxcd.io/v1
       kind: GitRepository
       metadata:
