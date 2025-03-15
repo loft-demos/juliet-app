@@ -12,7 +12,7 @@ apiVersion: v1
 kind: Secret
 metadata:
   name: vcluster-platform-provider-headers
-  namespace: default
+  namespace: p-auth-core
 stringData:
   headers: |
     Authorization: Bearer ${accessKey}
