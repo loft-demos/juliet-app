@@ -42,7 +42,7 @@ spec:
         namespace: p-auth-core
       spec:
         provider: generic # or 'github' if using GitHub App
-        interval: 1h
+        interval: 48h
         url: https://github.com/loft-demos/juliet-app
         ref:
           # configured to only watch the Pull Request branch as the vCluster does not need to be updated for each PR commit
@@ -62,7 +62,7 @@ spec:
           name: juliet-app-flux-vcluster-preview-<< inputs.id >>
         path: "./vcluster-gitops/argocd/flux/pull-request-environments/kustomize"
         prune: true
-        timeout: 2m
+        timeout: 48h
         wait: true
         # important: this feature requires Flux 2.5+
         healthCheckExprs:
@@ -87,7 +87,7 @@ spec:
         namespace: p-auth-core
       spec:
         provider: generic # or 'github' if using GitHub App
-        interval: 1h
+        interval: 48h
         url: https://github.com/loft-demos/juliet-app
         ref:
           # using PR head sha will trigger update on every commit to PR head branch
@@ -103,7 +103,7 @@ spec:
           # this dependsOn allows for vCluster to be up and running before Flux deploys HelmRelease
           - name: juliet-app-flux-vcluster-preview-<< inputs.id >>
             namespace: p-auth-core
-        interval: 1h
+        interval: 48h
         retryInterval: 3m
         timeout: 5m
         prune: true
