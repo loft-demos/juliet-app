@@ -10,6 +10,16 @@ spec:
       kind: ResourceSetInputProvider
       name: preview-pull-requests
   resources:
+    - apiVersion: notification.toolkit.fluxcd.io/v1beta3
+      kind: Provider
+      metadata:
+        name: juliet-app-preview-<< inputs.id >>
+        namespace: p-auth-core
+      spec:
+        type: generic
+        address: https://juliet.us.demo.dev/kubernetes/project/auth-core/virtualcluster/juliet-app-flux-vcluster-preview-<< inputs.id >>
+        secretRef:
+          name: vcluster-platform-provider-headers
     - apiVersion: source.toolkit.fluxcd.io/v1
       kind: GitRepository
       metadata:
