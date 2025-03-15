@@ -3,6 +3,8 @@ kind: Ingress
 metadata:
   name: karpor-ingress
   namespace: karpor
+  annotations:
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
 spec:
   ingressClassName: nginx
   rules:
