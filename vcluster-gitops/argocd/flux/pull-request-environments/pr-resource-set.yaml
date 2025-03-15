@@ -26,7 +26,8 @@ spec:
         name: juliet-app-preview-<< inputs.id >>
         namespace: p-auth-core
       spec:
-        summary: "PR Updated, wakeup vCluster"
+        eventMetadata:
+          summary: "PR Updated, wakeup vCluster"
         providerRef:
           name: juliet-app-preview-<< inputs.id >>
         eventSeverity: info
