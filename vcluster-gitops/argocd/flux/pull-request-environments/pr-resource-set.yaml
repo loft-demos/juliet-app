@@ -30,6 +30,8 @@ spec:
         providerRef:
           name: juliet-app-preview-<< inputs.id >>
         eventSeverity: info
+        inclusionList:
+          - ".*commit.*"
         eventSources:
           - kind: GitRepository
             name: 'juliet-app-preview-<< inputs.id >>'
