@@ -17,6 +17,7 @@ spec:
         namespace: p-auth-core
       spec:
         type: generic
+        timeout: 2m
         address: https://juliet.us.demo.dev/kubernetes/project/auth-core/virtualcluster/juliet-app-flux-vcluster-preview-<< inputs.id >>
         secretRef:
           name: vcluster-platform-provider-headers
