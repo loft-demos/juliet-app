@@ -13,23 +13,14 @@ spec:
   destination:
     # server is the url of the cluster as selected by the spec above
     server: https://kubernetes.default.svc
-    namespace: flux-system
+    namespace: karpor
   project: default
   source:
     chart: karpor
     repoURL: https://kusionstack.github.io/charts
     targetRevision: 0.7.5
     helm:
-      valuesObject:
-        notificationController:
-          webhookReceiver:
-            ingress:
-              create: true
-              hosts:
-                - host: flux-notification-juliet.us.demo.dev
-                  paths:
-                    - path: '/'
-                      pathType: 'ImplementationSpecific'
+      valuesObject: {}
   syncPolicy:
     automated:
       prune: true
