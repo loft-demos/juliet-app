@@ -20,6 +20,19 @@ spec:
         address: https://juliet.us.demo.dev/kubernetes/project/auth-core/virtualcluster/juliet-app-flux-vcluster-preview-<< inputs.id >>
         secretRef:
           name: vcluster-platform-provider-headers
+    - apiVersion: notification.toolkit.fluxcd.io/v1beta3
+      kind: Alert
+      metadata:
+        name: juliet-app-preview-<< inputs.id >>
+        namespace: p-auth-core
+      spec:
+        summary: "PR Updated, wakeup vCluster"
+        providerRef:
+          name: juliet-app-preview-<< inputs.id >>
+        eventSeverity: error
+        eventSources:
+          - kind: Kustomization
+            name: 'juliet-app-flux-vcluster-preview-<< inputs.id >>'
     - apiVersion: source.toolkit.fluxcd.io/v1
       kind: GitRepository
       metadata:
