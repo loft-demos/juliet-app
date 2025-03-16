@@ -138,7 +138,7 @@ spec:
                 # the following annotations are used to populate notifications
                 value:
                   event.toolkit.fluxcd.io/preview-url: "https://podinfo-juliet-app-flux-vcluster-preview-<< inputs.id >>.us.demo.dev"
-                  event.toolkit.fluxcd.io/pr-number: << inputs.id | quote >>
+                  event.toolkit.fluxcd.io/pr-number: "<< inputs.id >>"
               - op: add
                 # the kubeConfig.secretRef must be in the same namesapce as the HelmRelease
                 # the vCluster exportKubeConfig is configured to create the Flux useable vCluster Kube Config in the vCluster host namespace
