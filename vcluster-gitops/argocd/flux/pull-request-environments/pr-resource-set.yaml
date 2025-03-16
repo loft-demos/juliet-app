@@ -67,7 +67,7 @@ spec:
         path: "./vcluster-gitops/argocd/flux/pull-request-environments/kustomize"
         prune: true
         timeout: 5m
-        wait: true
+        wait: false
         # important: this feature requires Flux 2.5+
         healthCheckExprs:
           - apiVersion: management.loft.sh/v1
