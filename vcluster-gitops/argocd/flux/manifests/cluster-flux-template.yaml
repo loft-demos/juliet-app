@@ -91,7 +91,7 @@ spec:
             metadata:
               name: github-pat
               labels:
-                loft.sh/project-secret-name: loft-demo-pat
+                loft.sh/project-secret-name: loft-demos-pat
             data:
             ---
             apiVersion: notification.toolkit.fluxcd.io/v1beta3
