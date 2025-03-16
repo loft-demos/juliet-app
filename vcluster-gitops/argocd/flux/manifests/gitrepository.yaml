@@ -18,5 +18,5 @@ spec:
   type: githubdispatch
   address: https://github.com/loft-demos/juliet-app
   secretRef:
-    name: github-pat
+    name: loft-demos-pat
 ---
