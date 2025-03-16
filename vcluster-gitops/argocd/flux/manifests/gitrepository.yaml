@@ -8,3 +8,14 @@ spec:
   url: https://github.com/loft-demos/juliet-app.git
   ref:
     branch: main
+---
+apiVersion: notification.toolkit.fluxcd.io/v1beta3
+kind: Provider
+metadata:
+  name: github-dispatch
+spec:
+  type: githubdispatch
+  address: https://github.com/loft-demos/juliet-app
+  secretRef:
+    name: github-pat
+---
