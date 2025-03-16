@@ -96,6 +96,17 @@ spec:
         ref:
           # using PR head sha will trigger update on every commit to PR head branch
           commit: << inputs.sha >>
+    - apiVersion: notification.toolkit.fluxcd.io/v1beta3
+      kind: Alert
+      metadata:
+        name: github-pr-comment-juliet-app-preview-<< inputs.id >>
+      spec:
+        providerRef:
+          name: github-dispatch
+        eventSources:
+          - kind: HelmRelease
+            name: '*'
+            namespace: "loft-auth-core-v-juliet-app-flux-vcluster-preview-<< inputs.id >>"
     # Kustomization wrapper for HelmRelease to allow use of dependsOn
     - apiVersion: kustomize.toolkit.fluxcd.io/v1
       kind: Kustomization
