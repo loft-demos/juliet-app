@@ -84,8 +84,37 @@ spec:
           ingress: {}
         spaceTemplate:
           metadata: {}
-          apps:
-            - name: generate-vcluster-kubeconfig
+          objects: |-
+            ---
+            apiVersion: v1
+            kind: Secret
+            metadata:
+              name: github-app-secret
+              labels:
+                loft.sh/project-secret-name: loft-demo-org-cred
+            data:
+            ---
+            apiVersion: notification.toolkit.fluxcd.io/v1beta3
+            kind: Provider
+            metadata:
+              name: github-app-secret
+            spec:
+              type: githubdispatch
+              address: https://github.com/loft-demos/juliet-app
+              secretRef:
+                name: github-auth
+            ---
+            apiVersion: notification.toolkit.fluxcd.io/v1beta3
+            kind: Alert
+            metadata:
+              name: github-pr-comment
+            spec:
+              providerRef:
+                name: github-dispatch
+              eventSources:
+                - kind: HelmRelease
+                  name: '*'
+
     - version: 0.0.0
       template:
         metadata: {}
