@@ -15,6 +15,7 @@ jobs:
           - Preview URL: ${{ github.event.client_payload.metadata.preview-url }}
           - Revision: ${{ github.event.client_payload.metadata.revision }}
           - Status: ${{ github.event.client_payload.message }}
+          - Commit: ${{ github.event.client_payload.metadata.sha }}
           EOF
       - name: Post Comment
         env:
