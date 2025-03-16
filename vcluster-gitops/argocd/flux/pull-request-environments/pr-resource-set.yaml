@@ -9,8 +9,6 @@ spec:
     - apiVersion: fluxcd.controlplane.io/v1
       kind: ResourceSetInputProvider
       name: preview-pull-requests
-  inputs:
-    - shortSha: "<< inputs.sha | substr 0 6 >>"
   resources:
     - apiVersion: notification.toolkit.fluxcd.io/v1beta3
       kind: Provider
@@ -141,7 +139,7 @@ spec:
                 value:
                   event.toolkit.fluxcd.io/preview-url: "https://podinfo-juliet-app-flux-vcluster-preview-<< inputs.id >>.us.demo.dev"
                   event.toolkit.fluxcd.io/pr-number: "<< inputs.id >>"
-                  event.toolkit.fluxcd.io/short-sha: "<< inputs.shortSha >>"
+                  event.toolkit.fluxcd.io/sha: "<< inputs.sha >>"
               - op: add
                 # the kubeConfig.secretRef must be in the same namesapce as the HelmRelease
                 # the vCluster exportKubeConfig is configured to create the Flux useable vCluster Kube Config in the vCluster host namespace
