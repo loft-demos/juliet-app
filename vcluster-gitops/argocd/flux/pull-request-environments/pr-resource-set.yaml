@@ -104,6 +104,8 @@ spec:
       spec:
         providerRef:
           name: github-dispatch
+        exclusionList:
+          - ".*uninstall failed.*"
         eventSources:
           - kind: HelmRelease
             name: '*'
