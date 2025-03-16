@@ -89,9 +89,9 @@ spec:
             apiVersion: v1
             kind: Secret
             metadata:
-              name: github-app-secret
+              name: github-pat
               labels:
-                loft.sh/project-secret-name: loft-demo-org-cred
+                loft.sh/project-secret-name: loft-demo-pat
             data:
             ---
             apiVersion: notification.toolkit.fluxcd.io/v1beta3
@@ -102,7 +102,7 @@ spec:
               type: githubdispatch
               address: https://github.com/loft-demos/juliet-app
               secretRef:
-                name: github-app-secret
+                name: github-pat
             ---
             apiVersion: notification.toolkit.fluxcd.io/v1beta3
             kind: Alert
