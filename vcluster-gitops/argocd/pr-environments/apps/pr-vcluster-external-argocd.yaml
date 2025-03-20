@@ -30,7 +30,7 @@ spec:
           value: https://argocd-juliet.us.demo.dev
         - name: GitHub PR
           value: https://github.com/loft-demos/juliet-app/pull/{{number}}
-      project: loft-auth-core # this should be default if you are not using Argo CD projects other than the default project
+      project: default # this should be default if you are not using Argo CD projects other than the default project
       source:
         kustomize:
           namePrefix: juliet-app-pr-{{number}}-
