@@ -101,7 +101,7 @@ spec:
                     cpu: 1
                 image:
                   repository: "loft-demos/vcluster-pro"
-                  tag: "0.22.3-k8s.{{ .Values.k8sVersion }}"
+                  tag: "0.22.4-k8s.{{ .Values.k8sVersion }}"
               # Use an embedded managed etcd server instead of using the default SQLite backend
               backingStore:
                 etcd:
@@ -130,11 +130,11 @@ spec:
           label: k8sVersion
           description: Please select Kubernetes version
           options:
-            - v1.32.1
-            - v1.31.5
-            - v1.30.9
+            - v1.32.2
+            - v1.31.6
+            - v1.30.10
             - v1.29.14
-          defaultValue: v1.31.5
+          defaultValue: v1.31.6
           section: Kubernetes Environment
         - variable: pvClaimName
           label: Persistent Volume Claim Name
