@@ -52,7 +52,7 @@ spec:
         - name: GitHub Repo
           value: https://github.com/loft-demos/{{metadata.labels.repo}}/
       # set the Argo CD project to default if not using a specific project 
-      project: loft-auth-core
+      project: default
       source:
         repoURL: https://github.com/loft-demos/{{metadata.labels.repo}}.git
         targetRevision: '{{head_sha}}'
