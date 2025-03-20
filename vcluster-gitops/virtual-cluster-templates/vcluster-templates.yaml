@@ -102,9 +102,6 @@ spec:
                 image:
                   repository: "loft-demos/vcluster-pro"
                   tag: "0.22.3-k8s.{{ .Values.k8sVersion }}"
-                persistence:
-                  volumeClaim:
-                    storageClass: "standard-rwo"
               # Use an embedded managed etcd server instead of using the default SQLite backend
               backingStore:
                 etcd:
