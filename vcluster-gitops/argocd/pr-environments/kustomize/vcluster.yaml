@@ -3,8 +3,7 @@ kind: VirtualClusterInstance
 metadata:
   name: vcluster
   namespace: p-auth-core
-  metadata:
-    labels: {}
+  labels: {}
 spec:
   owner:
     team: auth-core
